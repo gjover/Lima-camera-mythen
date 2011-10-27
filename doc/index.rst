@@ -1,7 +1,7 @@
-ROPERSCIENTIFIC
--------
+Mythen
+------
 
-.. image:: xxx.jpg
+.. image:: mythen.jpg
 
 Intoduction
 ```````````
@@ -35,4 +35,4 @@ Installation
 
 
 Configuration
-````````````
+`````````````
