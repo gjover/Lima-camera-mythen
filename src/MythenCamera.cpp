@@ -70,7 +70,7 @@ void Camera::CameraThread::execStartAcq()
 	
   setStatus(Exposure);
 
-  StdBufferCbMgr& buffer_mgr = m_cam->m_buffer_ctrl_mgr.getBuffer();
+  StdBufferCbMgr& buffer_mgr = m_cam->m_buffer_ctrl_obj.getBuffer();
   buffer_mgr.setStartTimestamp(Timestamp::now());
   
   int nb_frames = m_cam->m_nb_frames;
@@ -379,11 +379,11 @@ Camera::~Camera()
 }
 
 
-HwBufferCtrlObj* Camera::getBufferMgr()
+HwBufferCtrlObj* Camera::getBufferCtrlObj()
 {
   DEB_MEMBER_FUNCT();
 
-  return &m_buffer_ctrl_mgr;
+  return &m_buffer_ctrl_obj;
 }
 
 Camera::Status Camera::getStatus()
