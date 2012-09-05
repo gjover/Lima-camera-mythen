@@ -136,7 +136,7 @@ void Camera::CameraThread::execStartAcq()
 
     unsigned long *ptr = (unsigned long*)buffer_mgr.getFrameBufferPtr(frame_nb);
   
-    memcpy(ptr,m_cam->m_data,m_cam->m_size/sizeof(unsigned long)+1);
+    memcpy(ptr,m_cam->m_data,m_cam->m_size*sizeof(unsigned long)+1);
 
     buffer_mgr.setStartTimestamp(Timestamp::now());
     

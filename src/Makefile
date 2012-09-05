@@ -1,8 +1,15 @@
 mythen-objs =  MythenInterface.o MythenCamera.o
 SRCS = $(mythen-objs:.o=.cpp) 
 
-CXXFLAGS += -I/usr/local/include/slsdetector -I../include -I../../../hardware/include -I../../../common/include \
-	-pthread -fPIC -g 
+CXXFLAGS += -I../sdk/slsDetectorSoftware/slsDetector \
+            -I../sdk/slsDetectorSoftware/mythenDetector \
+            -I../sdk/slsDetectorSoftware/commonFiles \
+            -I../sdk/slsDetectorSoftware/usersFunctions \
+            -I../sdk/slsDetectorSoftware/MySocketTCP \
+            -I../include \
+            -I../../../hardware/include \
+            -I../../../common/include \
+            -pthread -fPIC -g
 
 all:	Mythen.o
 
