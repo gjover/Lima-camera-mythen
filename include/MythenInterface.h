@@ -125,14 +125,41 @@ public:
 	virtual 		~Interface();
 
 	//- From HwInterface
-	virtual void 		getCapList(CapList&) const;
-	virtual void		reset(ResetLevel reset_level);
-	virtual void		prepareAcq();
-	virtual void	 	startAcq();
-	virtual void	 	stopAcq();
-	virtual void	 	getStatus(StatusType& status);
-	virtual int             getNbAcquiredFrames();
-	virtual int 		getNbHwAcquiredFrames();
+	virtual void        getCapList(CapList&) const;
+	virtual void        reset(ResetLevel reset_level);
+	virtual void        prepareAcq();
+	virtual void        startAcq();
+	virtual void        stopAcq();
+	virtual void        getStatus(StatusType& status);
+	virtual int         getNbAcquiredFrames();
+	virtual int         getNbHwAcquiredFrames();
+
+    short getNrOfModules();
+    void setNrOfModules(short nr);
+
+    short getDynamicRange();
+    void setDynamicRange(short dr);
+
+    string getCalDir();
+    void setCalDir(string calDir);
+
+    string getTrimDir();
+    void setTrimDir(string trimDir);
+
+    string getOutDir();
+    void setOutDir(string outDir);
+
+    string getOutFile();
+    void setOutFile(string outFile);
+
+    int getOutIndex();
+    void setOutIndex(int outIndex);
+
+    string getSettings();
+    void setSettings(string settings);
+
+    short getThreshold();
+    void setThreshold(short threshold);
 
 private:
 	Camera&		m_cam;

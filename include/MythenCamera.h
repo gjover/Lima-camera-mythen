@@ -6,6 +6,7 @@
 #include "HwMaxImageSizeCallback.h"
 #include "HwBufferMgr.h"
 #include "ThreadUtils.h"
+#include <errno.h>
 
 namespace lima
 {
@@ -19,26 +20,23 @@ namespace lima
 
 
     public:
-      
-      enum Status {
-	Ready, Exposure, Readout, Latency,
-      };
+
+      enum Status {Ready, Exposure, Readout, Latency, Config};
 
       Camera(std::string HostName, int PortNb = 1952, int DetectorId = 0);
       ~Camera();
-     
+
       double exposure() const;
       void setExposure(double expo);
 
       bool isMonochrome() const;
-	
+
       Status getStatus();
       int    getNbAcquiredFrames() const {return m_acq_frame_nb;}
 
       VideoMode getVideoMode() const;
       void 	setVideoMode(VideoMode);
- 
-	
+
       void 	startAcq();	
       void 	stopAcq();
       void      prepareAcq();
@@ -68,7 +66,8 @@ namespace lima
 
       void new_mythen_detector();
       void mythen_set(std::string);
-      std::string mythen_get(mythenDetector myDetector, char *parameter);
+      //std::string mythen_get(mythenDetector myDetector, char *parameter);
+      std::string mythen_get(char *parameter);
       void refresh_fname();
       bool isGoodString(std::string);
 
@@ -93,6 +92,9 @@ namespace lima
       void        setThreshold(short threshold);
       short       getThreshold();
 
+      void        setSettings(std::string settings);
+      std::string       getSettings();
+
       void        Refresh();
 
       int getIntParameter(std::string parameter);
@@ -110,13 +112,10 @@ namespace lima
     private:
       class CameraThread : public CmdThread{
       public:
-	enum { // Status
-	  Ready = MaxThreadStatus, Exposure, Readout, Latency,
-	};
-	
-	enum { // Cmd 
-	  StartAcq = MaxThreadCmd, StopAcq, StartStartAcq, Refresh
-	};
+    //Status
+	enum { Ready = MaxThreadStatus, Exposure, Readout, Latency, Config };
+	//Cmd
+	enum { StartAcq = MaxThreadCmd, StopAcq, StartStartAcq, Refresh, SetSettings };
 	
 	CameraThread(Camera& cam);
 	
@@ -132,6 +131,7 @@ namespace lima
 	void execStartAcq();
 	void execStartStartAcq();
 	void execRefresh();
+    void execSetSettings();
 
 	Camera* m_cam;
 	
@@ -162,7 +162,8 @@ namespace lima
       int               m_error_code;
       int               m_nb_frames;
 
-      mythenDetector *m_detector;
+      //mythenDetector *m_detector;
+      multiSlsDetector *m_detector;
 
       bool ACBusyFlag; // Acquire Busy Flag
       bool BTBusyFlag; // Bus Test Busy Flag

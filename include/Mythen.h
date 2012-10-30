@@ -9,11 +9,12 @@
 	#define _x86
 #endif
 
-#include <mythenDetector.h>
+#include <multiSlsDetector.h>
+#include <multiSlsDetectorCommand.h>
 
-#define GET_ACTION     mythenDetector::GET_ACTION
-#define PUT_ACTION     mythenDetector::PUT_ACTION
-#define READOUT_ACTION mythenDetector::READOUT_ACTION
+#define GET_ACTION     slsDetectorDefs::GET_ACTION
+#define PUT_ACTION     slsDetectorDefs::PUT_ACTION
+#define READOUT_ACTION slsDetectorDefs::READOUT_ACTION
 #define MAX_ARGS       256
 #define L_STRING       4096
 #define M_STRING       1024
